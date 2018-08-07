@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/pm-api.blueprint
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: create html
+          command: echo '# test' > test.md
+      - save_cache:
+          key: blueprint-{{ epoch }}
+          paths:
+            - ~/pm-api.blueprint
+
+  deploy:
+    working_directory: ~/pm-api.blueprint
+    machine: true
+    steps:
+      - restore_cache:
+          keys:
+            - blueprint
+
+      - run:
+          name: deploy
+          command: aws s3 sync public s3://nagashima-blueprint/
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build 
+          filters:
+            branches:
+              only: master
+
