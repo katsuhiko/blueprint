@@ -1,0 +1,11 @@
+# Vi/Vim backup files
+*~
+*.swp
+*.swo
+
+# Emacs backup files
+.DS_Store
+*~
+*#
+.#*
+
