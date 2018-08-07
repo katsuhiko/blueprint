@@ -6,12 +6,15 @@ jobs:
     steps:
       - checkout
       - run:
+          name: create dir
+          command: mkdir blueprint.tmp
+      - run:
           name: create html
-          command: echo '# test' > test.md
+          command: echo '# test' > blueprint.tmp/test.md
       - save_cache:
           key: blueprint-{{ epoch }}
           paths:
-            - ~/pm-api.blueprint
+            - ~/pm-api.blueprint/blueprint.tmp
 
   deploy:
     working_directory: ~/pm-api.blueprint
@@ -23,7 +26,7 @@ jobs:
 
       - run:
           name: deploy
-          command: aws s3 sync ~/pm-api.blueprint s3://nagashima-blueprint/
+          command: aws s3 sync ~/pm-api.blueprint/blueprint.tmp s3://nagashima-blueprint/
 
 workflows:
   version: 2
