@@ -6,11 +6,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: AGLIO INSTALL
+          command: npm install -g aglio
+      - run:
           name: create dir
           command: mkdir blueprint.tmp
       - run:
           name: create html
           command: echo '# test' > blueprint.tmp/index.html
+      - run:
+          name: create blueprint
+          command: npm run aglio -- -i ~/pm-api.blueprint/Blueprint/spec/index.apib -o blueprint.tmp/index2.html --theme-variables streak --theme-template triple
       - save_cache:
           key: blueprint-{{ epoch }}
           paths:
