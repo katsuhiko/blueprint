@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: deploy
-          command: aws s3 sync public s3://nagashima-blueprint/
+          command: aws s3 sync ~/pm-api.blueprint s3://nagashima-blueprint/
 
 workflows:
   version: 2
