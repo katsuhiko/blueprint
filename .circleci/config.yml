@@ -10,7 +10,7 @@ jobs:
           command: mkdir blueprint.tmp
       - run:
           name: create html
-          command: echo '# test' > blueprint.tmp/test.md
+          command: echo '# test' > blueprint.tmp/index.html
       - save_cache:
           key: blueprint-{{ epoch }}
           paths:
