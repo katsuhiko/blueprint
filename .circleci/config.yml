@@ -16,7 +16,7 @@ jobs:
           command: echo '# test' > blueprint.tmp/index.html
       - run:
           name: create blueprint
-          command: aglio -i Blueprint/spec/index.apib -o blueprint.tmp/index2.html --theme-variables streak --theme-template triple
+          command: aglio -i spec/index.apib -o blueprint.tmp/index2.html --theme-variables streak --theme-template triple
       - save_cache:
           key: blueprint-{{ epoch }}
           paths:
