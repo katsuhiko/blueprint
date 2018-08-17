@@ -5,9 +5,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run:
-          name: install aglio
-          command: npm install -g aglio
+#      - run:
+#          name: install aglio
+#          command: npm install -g aglio
       - run:
           name: create dir
           command: mkdir blueprint.tmp
