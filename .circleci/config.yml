@@ -6,16 +6,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: create dir
+          name: Create dir
           command: mkdir blueprint.tmp
 #      - run:
-#          name: install aglio
+#          name: Install aglio
 #          command: npm install -g aglio
 #      - run:
-#          name: create blueprint
+#          name: Create blueprint
 #          command: aglio -i spec/index.apib -o blueprint.tmp/index.html --theme-variables streak --theme-template triple
       - run:
-          name: create blueprint
+          name: Create blueprint
           command: docker run -ti --rm -v $PWD:/docs humangeo/aglio aglio -i /docs/spec/index.apib -o /docs/blueprint.tmp/index.html --theme-variables streak --theme-template triple
       - save_cache:
           key: blueprint-{{ epoch }}
@@ -30,7 +30,7 @@ jobs:
           keys:
             - blueprint
       - run:
-          name: deploy
+          name: Deploy
           command: aws s3 sync ~/pm-api.blueprint/blueprint.tmp s3://nagashima-blueprint/
 
 workflows:
@@ -44,4 +44,3 @@ workflows:
           filters:
             branches:
               only: master
-
